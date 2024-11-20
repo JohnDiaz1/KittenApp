@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo del splash screen -->
+    <item android:drawable="@color/splash_background_color" />
+
+    <!-- Contenedor para el texto y la imagen -->
+    <item>
+        <frame xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:paddingTop="50dp"
+                android:text="KittenApp"
+                android:textColor="@android:color/black"
+                android:textSize="40sp"
+                android:fontFamily="nunito_bold"
+                android:textStyle="bold" />
+
+            <!-- Imagen centrada -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_launcher" />
+        </frame>
+    </item>
+</layer-list>
