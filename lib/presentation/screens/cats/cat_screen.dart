@@ -28,7 +28,7 @@ class _CatScreenState extends State<CatScreen> {
                   width: double.infinity,
                   color: Colors.orange,
                   child: Image.network(
-                     widget.catDetails.referenceImageId!,
+                     widget.catDetails.image!.url,
                     fit: BoxFit.cover,
                   ),
                 ),

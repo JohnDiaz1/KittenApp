@@ -19,41 +19,38 @@ class CatController {
       }
     } catch (e) {
       throw Exception('Error fetching cats: $e');
-      return [];
     }
   }
 
-  Future<String> getCatImage(String imageId) async {
+  Future<CatImage?> getCatImage(String imageId) async {
     try {
       final response = await _services.getCatImage(imageId);
 
       if(response.statusCode == 200) {
-          final data = json.decode(response.body);
-          return data['url'];
+          final jsonData = json.decode(response.body);
+          return CatImage.fromJson(jsonData);
       }else {
         throw Exception('Failed to load cat image: ${response.statusCode}');
       }
 
     } catch(e){
       throw Exception('Error fetching cats: $e');
-      return "";
     }
   }
 
-  Future<String> getRandomCatImage() async {
+  Future<CatImage?> getRandomCatImage() async {
     try {
       final response = await _services.getRandomCatImage();
 
       if(response.statusCode == 200) {
-        final data = json.decode(response.body);
-        return data[0]['url'];
+        final jsonData = json.decode(response.body);
+        return CatImage.fromJson(jsonData[0]);
       }else {
         throw Exception('Failed to load random image cat: ${response.statusCode}');
       }
 
     } catch(e){
       throw Exception('Error fetching cats: $e');
-      return "";
     }
   }
 

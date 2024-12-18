@@ -46,6 +46,7 @@ class CatDetails {
   String? wikipediaUrl;
   int hypoallergenic;
   String? referenceImageId;
+  CatImage? image;
   int? catFriendly;
   int? bidability;
 
@@ -87,6 +88,7 @@ class CatDetails {
     this.wikipediaUrl,
     required this.hypoallergenic,
     this.referenceImageId,
+    this.image,
     this.catFriendly,
     this.bidability,
   });
@@ -129,6 +131,7 @@ class CatDetails {
     wikipediaUrl: json["wikipedia_url"] ?? '',
     hypoallergenic: json["hypoallergenic"],
     referenceImageId: json["reference_image_id"] ?? '',
+    image: json["image"] == null ? null : CatImage.fromJson(json["image"]),
     catFriendly: json["cat_friendly"] ?? 0,
     bidability: json["bidability"] ?? 0,
   );
@@ -171,8 +174,37 @@ class CatDetails {
     "wikipedia_url": wikipediaUrl,
     "hypoallergenic": hypoallergenic,
     "reference_image_id": referenceImageId,
+    "image": image?.toJson(),
     "cat_friendly": catFriendly,
     "bidability": bidability,
+  };
+}
+
+class CatImage {
+  String id;
+  int width;
+  int height;
+  String url;
+
+  CatImage({
+    required this.id,
+    required this.width,
+    required this.height,
+    required this.url,
+  });
+
+  factory CatImage.fromJson(Map<String, dynamic> json) => CatImage(
+    id: json["id"],
+    width: json["width"],
+    height: json["height"],
+    url: json["url"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "width": width,
+    "height": height,
+    "url": url,
   };
 }
 

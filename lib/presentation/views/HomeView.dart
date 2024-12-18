@@ -18,16 +18,16 @@ class _HomeViewState extends ConsumerState<HomeView> {
     final catBreedsAsyncValue = ref.watch(catBreedsProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kitten App'),
+        title: const Text('Kitten App'),
       ),
       body: Column(
         children: [
           Padding(
-              padding: EdgeInsets.only( left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
+              padding: const EdgeInsets.only( left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
             child: TextField(
               decoration: InputDecoration(
                 labelText: 'Search',
-                prefixIcon:  Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),

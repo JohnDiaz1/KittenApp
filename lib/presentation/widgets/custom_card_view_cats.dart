@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kitten_app/presentation/widgets/widgets.dart';
 import 'package:kitten_app/domain/models/cat_details.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kitten_app/controllers/cat_controller.dart';
 
 class CustomCardViewCats extends StatelessWidget {
@@ -12,9 +11,8 @@ class CustomCardViewCats extends StatelessWidget {
 
   final CatController catController = CatController();
 
-  Future<String> _fetchImageUrl() async {
-    if (catDetails.referenceImageId == null || catDetails.referenceImageId!.isEmpty) {
-
+  Future<CatImage?> _fetchImageUrl() async {
+    if (catDetails.image == null || catDetails.referenceImageId!.isEmpty || catDetails.referenceImageId == null) {
       return await catController.getRandomCatImage();
     } else {
       return await catController.getCatImage(catDetails.referenceImageId!);
@@ -43,7 +41,7 @@ class CustomCardViewCats extends StatelessWidget {
                 height: 200,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(40),
-                  child: FutureBuilder<String>(
+                  child: FutureBuilder<CatImage?>(
                     future: _fetchImageUrl(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -51,9 +49,9 @@ class CustomCardViewCats extends StatelessWidget {
                       } else if (snapshot.hasError) {
                         return const Center(child: Icon(Icons.error, size: 50, color: Colors.red));
                       } else {
-                        catDetails.referenceImageId = snapshot.data!;
+                        catDetails.referenceImageId = snapshot.data!.id;
                         return Image.network(
-                          snapshot.data!,
+                          snapshot.data!.url,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
                             return const Center(
